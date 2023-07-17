@@ -65,7 +65,7 @@
   :init (dashboard-setup-startup-hook)
   :config
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
-        dashboard-startup-banner "~/.config/.dotfiles/config/emacs/logo.png"
+        dashboard-startup-banner "~/.config/emacs/logo.png"
         dashboard-center-content t))
 
 (provide 'theming)
