@@ -3,19 +3,26 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/master";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     
-    utils-flake.url = "github:mislavzanic/utils-flake";
+    nix-utils = {
+      url = "github:mislavzanic/nix-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
     nixpkgs,
     emacs-overlay,
-    utils-flake,
+    nix-utils,
     ...
   }: let
     inherit (lib.my) mapModules;
-    inherit (utils-flake) mkPkgs;
+    inherit (nix-utils) mkPkgs;
 
     pkgs = mkPkgs {
       system = "x86_64-linux";
@@ -23,15 +30,8 @@
       overlays = [];
     };
 
-    lib = nixpkgs.lib.extend (utils-flake.mkLib {inherit inputs pkgs;});
+    lib = nixpkgs.lib.extend (nix-utils.mkLib {inherit inputs pkgs;});
   in {
     modules = mapModules ./nix import;
-
-    emacsFiles = {
-      "emacs" = {
-        source = builtins.toString ./emacs;
-        recursive = true;
-      };
-    };
   };
 }
