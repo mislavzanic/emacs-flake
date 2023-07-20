@@ -6,6 +6,7 @@ in {
   options.editor.emacs = {
     enable = mkBoolOpt false;
     enableServer = mkBoolOpt false;
+    homeCfg = mkBoolOpt true;
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -41,5 +42,13 @@ in {
 
       services.emacs.enable = cfg.enableServer;
     }
+    (mkIf cfg.homeCfg {
+      home.configFile = {
+        "emacs" = {
+          source = builtins.toString ../emacs;
+          recursive = true;
+        };
+      };
+    })
   ]);
 }
