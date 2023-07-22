@@ -3,7 +3,7 @@ with lib;
 with lib.my; let
   cfg = config.modules.editor.emacs;
 in {
-  options.modules.editor.emacs = {
+  options.modules.editor.emacs = with types; {
     enable = mkBoolOpt false;
     enableServer = mkBoolOpt false;
     path = mkOpt str (builtins.toString ../emacs);
