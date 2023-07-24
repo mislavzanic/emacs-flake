@@ -7,6 +7,7 @@ in {
     enable = mkBoolOpt false;
     enableServer = mkBoolOpt false;
     path = mkOpt str (builtins.toString ../emacs);
+    hm = mkBoolOpt false;
   };
 
   config = let
@@ -18,10 +19,7 @@ in {
         emacsql-sqlite
         org-roam
       ]));
-  in mkIf cfg.enable {
-    nixpkgs.overlays = [inputs.emacs-overlay.overlay];
-
-    environment.systemPackages = with pkgs; [
+    packages = with pkgs; [
       customEmacs
 
       binutils
@@ -34,17 +32,29 @@ in {
       xdotool
       xorg.xwininfo
     ];
+  in mkIf cfg.enable (mkMerge [
+    {
+      nixpkgs.overlays = [inputs.emacs-overlay.overlay];
 
-    fonts.fonts = with pkgs; [
-      emacs-all-the-icons-fonts
-      jetbrains-mono
-      nerdfonts
-      cantarell-fonts
-    ];
+      environment.systemPackages = packages;
 
-    services.emacs = {
-      enable = cfg.enableServer;
-      package = customEmacs;
-    };
-  };
+      fonts.fonts = with pkgs; [
+        emacs-all-the-icons-fonts
+        jetbrains-mono
+        nerdfonts
+        cantarell-fonts
+      ];
+
+      services.emacs = {
+        enable = cfg.enableServer;
+        package = customEmacs;
+      };
+    }
+    (mkIf cfg.hm {
+      home.packages = packages;
+    })
+    (mkIf (cfg.hm != true) {
+      environment.systemPackages = packages;
+    })
+  ]);
 }
