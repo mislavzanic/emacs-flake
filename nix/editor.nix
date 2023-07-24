@@ -36,8 +36,6 @@ in {
     {
       nixpkgs.overlays = [inputs.emacs-overlay.overlay];
 
-      environment.systemPackages = packages;
-
       fonts.fonts = with pkgs; [
         emacs-all-the-icons-fonts
         jetbrains-mono
