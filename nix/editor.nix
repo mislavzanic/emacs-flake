@@ -36,23 +36,27 @@ in {
     {
       nixpkgs.overlays = [inputs.emacs-overlay.overlay];
 
-      fonts.fonts = with pkgs; [
-        emacs-all-the-icons-fonts
-        jetbrains-mono
-        nerdfonts
-        cantarell-fonts
-      ];
-
       services.emacs = {
         enable = cfg.enableServer;
         package = customEmacs;
       };
     }
     (mkIf cfg.hm {
-      home.packages = packages;
+      home.packages = packages ++ (with pkgs; [
+        emacs-all-the-icons-fonts
+        jetbrains-mono
+        nerdfonts
+        cantarell-fonts
+      ]);
     })
     (mkIf (cfg.hm != true) {
       user.packages = packages;
+      fonts.fonts = with pkgs; [
+        emacs-all-the-icons-fonts
+        jetbrains-mono
+        nerdfonts
+        cantarell-fonts
+      ];
     })
   ]);
 }
