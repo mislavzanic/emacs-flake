@@ -52,8 +52,7 @@ in {
       home.packages = packages;
     })
     (mkIf (cfg.hm != true) {
-      home.packages = packages;
-      # environment.systemPackages = packages;
+      user.packages = packages;
     })
   ]);
 }
