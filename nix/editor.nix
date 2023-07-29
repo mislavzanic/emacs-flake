@@ -10,49 +10,50 @@ in {
     path = mkOpt str (builtins.toString ../emacs);
   };
 
-  config = mkIf cfg.enable (mkMerge [
-    {
-      nixpkgs.overlays = [inputs.emacs-overlay.overlay];
+  config = mkIf cfg.enable (let
+    myEmacs = with pkgs;
+      ((emacsPackagesFor emacs).emacsWithPackages (epkgs: with epkgs; [
+          vterm
+          use-package
+          auto-compile
+          emacsql-sqlite
+          org-roam
+      ]));
+  in {
+    nixpkgs.overlays = [inputs.emacs-overlay.overlay];
 
-      core = {
-        packages = with pkgs; [
-          ((emacsPackagesFor emacs).emacsWithPackages (epkgs: with epkgs; [
-            vterm
-            use-package
-            auto-compile
-            emacsql-sqlite
-            org-roam
-          ]))
-          binutils
-          gnutls
-          fd
-          ripgrep
-          jq
-          imagemagick
-          sqlite
-          xdotool
-          xorg.xwininfo
-        ];
+    core = {
+      packages = with pkgs; [
+        myEmacs
+        binutils
+        gnutls
+        fd
+        ripgrep
+        jq
+        imagemagick
+        sqlite
+        xdotool
+        xorg.xwininfo
+      ];
 
-        fonts = with pkgs; [
-          emacs-all-the-icons-fonts
-          jetbrains-mono
-          nerdfonts
-          cantarell-fonts
-        ];
+      fonts = with pkgs; [
+        emacs-all-the-icons-fonts
+        jetbrains-mono
+        nerdfonts
+        cantarell-fonts
+      ];
+    };
+
+    services.emacs = {
+      enable = cfg.enableServer;
+      package = myEmacs;
+    };
+
+    home.configFile = {
+      "emacs" = {
+        source = builtins.toString ../emacs;
+        recursive = true;
       };
-
-      services.emacs = {
-        enable = cfg.enableServer;
-        package = customEmacs;
-      };
-
-      home.configFile = {
-        "emacs" = {
-          source = builtins.toString ../emacs;
-          recursive = true;
-        };
-      };
-    }
-  ]);
+    };
+  });
 }
