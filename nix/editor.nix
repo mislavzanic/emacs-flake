@@ -8,14 +8,13 @@ in {
     enable = mkBoolOpt false;
     enableServer = mkBoolOpt false;
     path = mkOpt str (builtins.toString ../emacs);
-    hm = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable (mkMerge [
     {
       nixpkgs.overlays = [inputs.emacs-overlay.overlay];
 
-      modules.${cfgType} = {
+      core = {
         packages = with pkgs; [
           ((emacsPackagesFor emacs).emacsWithPackages (epkgs: with epkgs; [
             vterm
