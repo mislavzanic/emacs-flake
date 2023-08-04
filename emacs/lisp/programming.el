@@ -95,7 +95,7 @@
   (haskell-indentation-where-post-offset 1)
   (haskell-process-auto-import-loaded-modules t))
 
-(use-package haskell-lsp
+(use-package lsp-haskell
   :ensure t)
 
 (use-package hindent
