@@ -32,37 +32,63 @@
   (electric-pair-mode +1)) ;; automatically insert closing parens 
 ;;  (setq electric-pair-preserve-balance nil)) ;; more annoying than useful
 
-(use-package eglot
-  :ensure t
-  :init (setq completion-category-overrides '((eglot (styles orderless))))
-  :config
-  (advice-add 'eglot :before #'direnv-update-environment))
-
-;; (use-package company
+;; (use-package eglot
 ;;   :ensure t
-;;   :hook (prog-mode . company-mode))
+;;   :init (setq completion-category-overrides '((eglot (styles orderless))))
+;;   :config
+;;   (advice-add 'eglot :before #'direnv-update-environment))
 
-(use-package corfu
+(use-package lsp-mode
   :ensure t
-  :init (global-corfu-mode)
-  :hook
-  (prog-mode . corfu-mode)
-  (eshell-mode . corfu-mode)
-  :bind (:map corfu-map
-	      ("RET" . corfu-insert)
-	      ("TAB" . corfu-next)
-	      ([tab] . corfu-next)
-	      ("S-TAB" . corfu-previous)
-	      ([backtab] . corfu-previous))
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration t))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (lsp-ui-doc-position 'bottom)
+  (lsp-ui-sideline-enable nil)
+  (lsp-ui-sideline-show-hover nil))
+
+(use-package company
+  :ensure t
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+         ("<tab>" . company-indent-or-complete-common))
   :custom
-  (corfu-cycle t)
-  (corfu-auto t)
-  (corfu-separator ?\s)
-  (corfu-auto-delay 0.0))
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
+;; (use-package corfu
+;;   :ensure t
+;;   :init (global-corfu-mode)
+;;   :hook
+;;   (prog-mode . corfu-mode)
+;;   (eshell-mode . corfu-mode)
+;;   :bind (:map corfu-map
+;; 	      ("RET" . corfu-insert)
+;; 	      ("TAB" . corfu-next)
+;; 	      ([tab] . corfu-next)
+;; 	      ("S-TAB" . corfu-previous)
+;; 	      ([backtab] . corfu-previous))
+;;   :custom
+;;   (corfu-cycle t)
+;;   (corfu-auto t)
+;;   (corfu-separator ?\s)
+;;   (corfu-auto-delay 0.0))
 
 (use-package haskell-mode
   :ensure t
-  :hook (haskell-mode . eglot-ensure)
+  :hook (haskell-mode . lsp-deferred)
   :custom
   (haskell-interactive-popup-errors nil)
   (haskell-indentation-where-pre-offset  1)
@@ -80,15 +106,15 @@
 
 (use-package go-mode
   :ensure t
-  :hook (go-mode . eglot-ensure))
+  :hook (go-mode . lsp-deferred))
 
 (use-package nix-mode
   :ensure t
-  :hook (nix-mode . eglot-ensure))
+  :hook (nix-mode . lsp-deferred))
 
 (use-package python-mode
   :ensure t
-  :hook (python-mode . eglot-ensure))
+  :hook (python-mode . lsp-deferred))
 
 (use-package yaml-mode
   :ensure t)
