@@ -47,11 +47,11 @@
   (lsp-enable-which-key-integration t))
 
 (use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :config
-  (lsp-ui-doc-position 'bottom)
-  (lsp-ui-sideline-enable nil)
-  (lsp-ui-sideline-show-hover nil))
+  :hook (lsp-mode . lsp-ui-mode))
+
+(setq lsp-ui-doc-position 'bottom)
+(setq lsp-ui-sideline-enable nil)
+(setq lsp-ui-sideline-show-hover nil)
 
 (use-package company
   :ensure t
