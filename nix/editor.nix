@@ -52,7 +52,6 @@ in {
           direnv
           company
           rainbow-delimiters
-          electric
           lsp-mode
           lsp-ui
           company
