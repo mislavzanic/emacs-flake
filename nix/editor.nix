@@ -15,8 +15,8 @@ in {
     myEmacs = with pkgs; (pkgs.emacsWithPackagesFromUsePackage {
       config = "${configDir}/init.el";
       package = emacs-unstable;
-      # defaultInitFile = true;
       alwaysEnsure = true;
+      extraEmacsPackages = epkgs: [epkgs.auto-compile];
     });
     # myEmacs = with pkgs;
     #   ((emacsPackagesFor emacs-unstable).emacsWithPackages (epkgs: with epkgs; [
