@@ -1,5 +1,9 @@
 (setq-default mode-line-format
 	      '("%e"
+		mode-line-modified
+		" "
+		mode-line-position
+		" "
 		mz-modeline/major-mode
 		))
 

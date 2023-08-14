@@ -51,7 +51,7 @@
 (require 'sensible-defaults)
 
 (require 'theming)
-(require 'modeline)
+;; (require 'modeline)
 (require 'keybindings)
 
 (require 'evil-conf)

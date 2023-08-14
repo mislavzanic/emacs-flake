@@ -2,23 +2,30 @@
 with lib;
 with lib.my; let
   cfg = config.modules.editor.emacs;
+  configDir = ../emacs;
   cfgType = config.type;
 in {
   options.modules.editor.emacs = with types; {
     enable = mkBoolOpt false;
     enableServer = mkBoolOpt false;
-    path = mkOpt str (builtins.toString ../emacs);
+    path = mkOpt str (builtins.toString configDir);
   };
 
   config = mkIf cfg.enable (let
-    myEmacs = with pkgs;
-      ((emacsPackagesFor emacs).emacsWithPackages (epkgs: with epkgs; [
-          vterm
-          use-package
-          auto-compile
-          emacsql-sqlite
-          org-roam
-      ]));
+    myEmacs = with pkgs; (pkgs.emacsWithPackagesFromUsePackage {
+      config = "${configDir}/init.el";
+      package = emacs-unstable;
+      defaultInitFile = true;
+      alwaysEnsure = true;
+    });
+    # myEmacs = with pkgs;
+    #   ((emacsPackagesFor emacs-unstable).emacsWithPackages (epkgs: with epkgs; [
+    #       vterm
+    #       use-package
+    #       auto-compile
+    #       emacsql-sqlite
+    #       org-roam
+    #   ]));
   in {
     nixpkgs.overlays = [inputs.emacs-overlay.overlay];
 
@@ -51,7 +58,7 @@ in {
 
     home.configFile = {
       "emacs" = {
-        source = builtins.toString ../emacs;
+        source = cfg.path;
         recursive = true;
       };
     };
