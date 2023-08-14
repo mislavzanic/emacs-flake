@@ -72,6 +72,10 @@ in {
           minions
           nyan-mode
           dashboard
+
+          dired-narrow
+          diredfl
+          gcmh
       ]));
   in {
     nixpkgs.overlays = [inputs.emacs-overlay.overlay];
