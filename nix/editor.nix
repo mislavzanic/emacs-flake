@@ -18,14 +18,65 @@ in {
       alwaysEnsure = true;
       extraEmacsPackages = epkgs: [epkgs.auto-compile];
     });
-    # myEmacs = with pkgs;
-    #   ((emacsPackagesFor emacs-unstable).emacsWithPackages (epkgs: with epkgs; [
-    #       vterm
-    #       use-package
-    #       auto-compile
-    #       emacsql-sqlite
-    #       org-roam
-    #   ]));
+    myEmacs = with pkgs;
+      ((emacsPackagesFor emacs-unstable).emacsWithPackages (epkgs: with epkgs; [
+          use-package
+          auto-compile
+
+          vterm
+          emacsql-sqlite
+          org-roam
+
+          vertico
+          savehist
+          orderless
+          marginalia
+          consult
+
+          dired
+          all-the-icons-dired
+          dired-open
+
+          evil
+          evil-collection
+          evil-commentary
+
+          xclip
+          helpful
+          beframe
+          projectile
+          magit
+          olivetti
+          hide-mode-line
+
+          which-key
+          general
+          org
+          org-agenda
+          evil-org
+          org-bullets
+          org-journal
+          org-present
+          
+          direnv
+          company
+          rainbow-delimiters
+          electric
+          lsp-mode
+          lsp-ui
+          company
+          company-box
+          haskell-mode
+          lsp-haskell
+          hindent
+          go-mode
+          nix-mode
+          python-mode
+          yaml-mode
+          terraform-mode
+          json-mode
+          markdown-mode
+      ]));
   in {
     nixpkgs.overlays = [inputs.emacs-overlay.overlay];
 

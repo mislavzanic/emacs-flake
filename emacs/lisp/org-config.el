@@ -117,13 +117,6 @@
   (org-present-mode      . mz/start-presentation)
   (org-present-mode-quit . mz/stop-presentation))
 
-(use-package ox-hugo
-  :ensure t
-  :after ox)
-
-;; (use-package org-modern
-;;   :ensure t
-;;   :init (global-org-modern-mode))
 
 (provide 'org-config)
 ;;; org-config.el ends here
