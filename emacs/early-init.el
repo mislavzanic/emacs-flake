@@ -37,20 +37,20 @@
 
 ;; Always recompile libraries if needed.  This being in early init is in
 ;; line with `auto-compile's manual.
-(let* ((dir "~/.config/emacs/elpa/")
-       (packages (directory-files dir))
-       (get-pkg (lambda (pkg)
-                  (seq-find (lambda (p) (string-prefix-p pkg p))
-                            packages))))
-  (dolist (pkg (list (funcall get-pkg "compat")
-                     (funcall get-pkg "packed")))
-    (add-to-list 'load-path (concat dir pkg))))
+;; (let* ((dir "~/.config/emacs/elpa/")
+;;        (packages (directory-files dir))
+;;        (get-pkg (lambda (pkg)
+;;                   (seq-find (lambda (p) (string-prefix-p pkg p))
+;;                             packages))))
+;;   (dolist (pkg (list (funcall get-pkg "compat")
+;;                      (funcall get-pkg "packed")))
+;;     (add-to-list 'load-path (concat dir pkg))))
 
 (setq load-prefer-newer t)
 
-(require 'auto-compile)
-(auto-compile-on-load-mode)
-(auto-compile-on-save-mode)
+;; (require 'auto-compile)
+;; (auto-compile-on-load-mode)
+;; (auto-compile-on-save-mode)
 
 (setq frame-inhibit-implied-resize t)
 
