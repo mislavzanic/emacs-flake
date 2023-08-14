@@ -32,30 +32,14 @@
   (electric-pair-mode +1)) ;; automatically insert closing parens 
 ;;  (setq electric-pair-preserve-balance nil)) ;; more annoying than useful
 
-;; (use-package eglot
-;;   :ensure t
-;;   :init (setq completion-category-overrides '((eglot (styles orderless))))
-;;   :config
-;;   (advice-add 'eglot :before #'direnv-update-environment))
-
-(use-package lsp-mode
-  :ensure t
-  :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-keymap-prefix "C-c l")
+(use-package eglot
+  :init (setq completion-category-overrides '((eglot (styles orderless))))
   :config
-  (lsp-enable-which-key-integration t))
-
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode))
-
-(setq lsp-ui-doc-position 'bottom)
-(setq lsp-ui-sideline-enable nil)
-(setq lsp-ui-sideline-show-hover nil)
+  (advice-add 'eglot :before #'direnv-update-environment))
 
 (use-package company
   :ensure t
-  :after lsp-mode
+  :after eglot
   :hook (prog-mode . company-mode)
   :bind (:map company-active-map
          ("<tab>" . company-complete-selection))
@@ -88,15 +72,15 @@
 
 (use-package haskell-mode
   :ensure t
-  :hook (haskell-mode . lsp-deferred)
+  :hook (haskell-mode . eglot-ensure)
   :custom
   (haskell-interactive-popup-errors nil)
   (haskell-indentation-where-pre-offset  1)
   (haskell-indentation-where-post-offset 1)
   (haskell-process-auto-import-loaded-modules t))
 
-(use-package lsp-haskell
-  :ensure t)
+;; (use-package lsp-haskell
+;;   :ensure t)
 
 (use-package hindent
   :ensure t
@@ -109,15 +93,15 @@
 
 (use-package go-mode
   :ensure t
-  :hook (go-mode . lsp-deferred))
+  :hook (go-mode . eglot-ensure))
 
 (use-package nix-mode
   :ensure t
-  :hook (nix-mode . lsp-deferred))
+  :hook (nix-mode . eglot-ensure))
 
 (use-package python-mode
   :ensure t
-  :hook (python-mode . lsp-deferred))
+  :hook (python-mode . eglot-ensure))
 
 (use-package yaml-mode
   :ensure t)
