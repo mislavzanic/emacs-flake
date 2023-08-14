@@ -12,12 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable (let
-    # myEmacs = with pkgs; (pkgs.emacsWithPackagesFromUsePackage {
-    #   config = "${configDir}/init.el";
-    #   package = emacs-unstable;
-    #   alwaysEnsure = true;
-    #   extraEmacsPackages = epkgs: [epkgs.auto-compile];
-    # });
     myEmacs = with pkgs;
       ((emacsPackagesFor emacs-unstable).emacsWithPackages (epkgs: with epkgs; [
           use-package
@@ -27,55 +21,55 @@ in {
           emacsql-sqlite
           org-roam
 
-          vertico
-          savehist
-          orderless
-          marginalia
-          consult
+          # vertico
+          # savehist
+          # orderless
+          # marginalia
+          # consult
 
-          dired
-          all-the-icons-dired
-          dired-open
+          # dired
+          # all-the-icons-dired
+          # dired-open
 
-          evil
-          evil-collection
-          evil-commentary
+          # evil
+          # evil-collection
+          # evil-commentary
 
-          xclip
-          helpful
-          beframe
-          projectile
-          magit
-          olivetti
-          hide-mode-line
+          # xclip
+          # helpful
+          # beframe
+          # projectile
+          # magit
+          # olivetti
+          # hide-mode-line
 
-          which-key
-          general
-          org
-          org-agenda
-          evil-org
-          org-bullets
-          org-journal
-          org-present
+          # which-key
+          # general
+          # org
+          # org-agenda
+          # evil-org
+          # org-bullets
+          # org-journal
+          # org-present
           
-          direnv
-          company
-          rainbow-delimiters
-          electric
-          lsp-mode
-          lsp-ui
-          company
-          company-box
-          haskell-mode
-          lsp-haskell
-          hindent
-          go-mode
-          nix-mode
-          python-mode
-          yaml-mode
-          terraform-mode
-          json-mode
-          markdown-mode
+          # direnv
+          # company
+          # rainbow-delimiters
+          # electric
+          # lsp-mode
+          # lsp-ui
+          # company
+          # company-box
+          # haskell-mode
+          # lsp-haskell
+          # hindent
+          # go-mode
+          # nix-mode
+          # python-mode
+          # yaml-mode
+          # terraform-mode
+          # json-mode
+          # markdown-mode
       ]));
   in {
     nixpkgs.overlays = [inputs.emacs-overlay.overlay];
