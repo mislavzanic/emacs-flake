@@ -13,9 +13,9 @@ in {
 
   config = mkIf cfg.enable (let
     myEmacs = with pkgs; (pkgs.emacsWithPackagesFromUsePackage {
-      config = "${configDir}/init.el";
+      config = ../emacs;
       package = emacs-unstable;
-      defaultInitFile = true;
+      # defaultInitFile = true;
       alwaysEnsure = true;
     });
     # myEmacs = with pkgs;
