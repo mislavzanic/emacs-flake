@@ -44,7 +44,6 @@ in {
           which-key
           general
           org
-          org-agenda
           evil-org
           org-bullets
           org-journal
