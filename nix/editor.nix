@@ -51,8 +51,8 @@ in {
           
           direnv
           company
+          corfu
           rainbow-delimiters
-          company
           company-box
           haskell-mode
           hindent

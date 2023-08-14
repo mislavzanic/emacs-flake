@@ -37,38 +37,37 @@
   :config
   (advice-add 'eglot :before #'direnv-update-environment))
 
-(use-package company
-  :ensure t
-  :after eglot
-  :hook (prog-mode . company-mode)
-  :bind (:map company-active-map
-         ("<tab>" . company-complete-selection))
-        ;; (:map lsp-mode-map
-        ;;  ("<tab>" . company-indent-or-complete-common))
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0))
-
-(use-package company-box
-  :hook (company-mode . company-box-mode))
-
-;; (use-package corfu
+;; (use-package company
 ;;   :ensure t
-;;   :init (global-corfu-mode)
-;;   :hook
-;;   (prog-mode . corfu-mode)
-;;   (eshell-mode . corfu-mode)
-;;   :bind (:map corfu-map
-;; 	      ("RET" . corfu-insert)
-;; 	      ("TAB" . corfu-next)
-;; 	      ([tab] . corfu-next)
-;; 	      ("S-TAB" . corfu-previous)
-;; 	      ([backtab] . corfu-previous))
+;;   :hook (prog-mode . company-mode)
+;;   :bind (:map company-active-map
+;;          ("<tab>" . company-complete-selection))
+;;         ;; (:map lsp-mode-map
+;;         ;;  ("<tab>" . company-indent-or-complete-common))
 ;;   :custom
-;;   (corfu-cycle t)
-;;   (corfu-auto t)
-;;   (corfu-separator ?\s)
-;;   (corfu-auto-delay 0.0))
+;;   (company-minimum-prefix-length 1)
+;;   (company-idle-delay 0.0))
+
+;; (use-package company-box
+;;   :hook (company-mode . company-box-mode))
+
+(use-package corfu
+  :ensure t
+  :init (global-corfu-mode)
+  :hook
+  (prog-mode . corfu-mode)
+  (eshell-mode . corfu-mode)
+  :bind (:map corfu-map
+	      ("RET" . corfu-insert)
+	      ("TAB" . corfu-next)
+	      ([tab] . corfu-next)
+	      ("S-TAB" . corfu-previous)
+	      ([backtab] . corfu-previous))
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-separator ?\s)
+  (corfu-auto-delay 0.0))
 
 (use-package haskell-mode
   :ensure t
