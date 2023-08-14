@@ -49,7 +49,7 @@
 
 (use-package consult
   :bind (("C-s" . consult-line)
-	 ("C-c c g" . consult-ripgrep)))
+	 ("C-c C-r" . consult-ripgrep)))
 
 (provide 'completion)
 ;;; completion.el ends here

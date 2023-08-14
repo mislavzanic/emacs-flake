@@ -22,6 +22,7 @@
 (use-package dired
   :ensure nil
   :hook (dired-mode . diredfl-mode)
+  :bind (("C-c C-j" . dired-jump))
   :config
   (evil-define-key 'normal dired-mode-map
     (kbd "h") 'dired-up-directory
