@@ -26,7 +26,6 @@ in {
           marginalia
           consult
 
-          dired
           all-the-icons-dired
           dired-open
 
