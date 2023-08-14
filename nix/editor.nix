@@ -52,12 +52,9 @@ in {
           direnv
           company
           rainbow-delimiters
-          lsp-mode
-          lsp-ui
           company
           company-box
           haskell-mode
-          lsp-haskell
           hindent
           go-mode
           nix-mode
