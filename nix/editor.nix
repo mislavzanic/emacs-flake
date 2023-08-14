@@ -12,12 +12,12 @@ in {
   };
 
   config = mkIf cfg.enable (let
-    myEmacs = with pkgs; (pkgs.emacsWithPackagesFromUsePackage {
-      config = "${configDir}/init.el";
-      package = emacs-unstable;
-      alwaysEnsure = true;
-      extraEmacsPackages = epkgs: [epkgs.auto-compile];
-    });
+    # myEmacs = with pkgs; (pkgs.emacsWithPackagesFromUsePackage {
+    #   config = "${configDir}/init.el";
+    #   package = emacs-unstable;
+    #   alwaysEnsure = true;
+    #   extraEmacsPackages = epkgs: [epkgs.auto-compile];
+    # });
     myEmacs = with pkgs;
       ((emacsPackagesFor emacs-unstable).emacsWithPackages (epkgs: with epkgs; [
           use-package
