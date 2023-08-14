@@ -37,20 +37,6 @@
   :config
   (advice-add 'eglot :before #'direnv-update-environment))
 
-;; (use-package company
-;;   :ensure t
-;;   :hook (prog-mode . company-mode)
-;;   :bind (:map company-active-map
-;;          ("<tab>" . company-complete-selection))
-;;         ;; (:map lsp-mode-map
-;;         ;;  ("<tab>" . company-indent-or-complete-common))
-;;   :custom
-;;   (company-minimum-prefix-length 1)
-;;   (company-idle-delay 0.0))
-
-;; (use-package company-box
-;;   :hook (company-mode . company-box-mode))
-
 (use-package corfu
   :ensure t
   :init (global-corfu-mode)
@@ -77,9 +63,6 @@
   (haskell-indentation-where-pre-offset  1)
   (haskell-indentation-where-post-offset 1)
   (haskell-process-auto-import-loaded-modules t))
-
-;; (use-package lsp-haskell
-;;   :ensure t)
 
 (use-package hindent
   :ensure t
