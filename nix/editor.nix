@@ -66,6 +66,12 @@ in {
           terraform-mode
           json-mode
           markdown-mode
+
+          modus-themes
+          fontaine
+          minions
+          nyan-mode
+          dashboard
       ]));
   in {
     nixpkgs.overlays = [inputs.emacs-overlay.overlay];
