@@ -53,6 +53,7 @@
   (corfu-cycle t)
   (corfu-auto t)
   (corfu-separator ?\s)
+  (completion-styles '(orderless-fast))
   (corfu-auto-delay 0.0))
 
 (use-package haskell-mode
