@@ -35,10 +35,7 @@
 (use-package eglot
   :init (setq completion-category-overrides '((eglot (styles orderless))))
   :config
-  (advice-add 'eglot :before #'direnv-update-environment)
-  ;; (add-to-list 'eglot-server-programs '((haskell-mode . ("haskell-language-server"))))
-  ;; (add-hook 'haskell-mode #'eglot-ensure)
-  )
+  (advice-add 'eglot :before #'direnv-update-environment))
 
 (use-package corfu
   :ensure t
