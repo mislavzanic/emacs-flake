@@ -35,7 +35,10 @@
 (use-package eglot
   :init (setq completion-category-overrides '((eglot (styles orderless))))
   :config
-  (advice-add 'eglot :before #'direnv-update-environment))
+  (advice-add 'eglot :before #'direnv-update-environment)
+  (add-to-list 'eglot-server-programs '(haskell-mode . ("haskell-language-server")))
+  :hook
+  (haskell-mode . eglot-ensure))
 
 (use-package corfu
   :ensure t
@@ -57,7 +60,6 @@
 
 (use-package haskell-mode
   :ensure t
-  :hook (haskell-mode . eglot-ensure)
   :custom
   (haskell-interactive-popup-errors nil)
   (haskell-indentation-where-pre-offset  1)
