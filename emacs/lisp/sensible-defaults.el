@@ -22,6 +22,7 @@
 (use-package emacs
   :ensure nil
   :custom (column-number-mode t)        ; for the modeline
+  :bind (("C-c y" . yank-from-kill-ring))
   :config
   (setq-default cursor-type 'hbar)
   (setq kill-do-not-save-duplicates t) ; Don't save duplicates to kill ring

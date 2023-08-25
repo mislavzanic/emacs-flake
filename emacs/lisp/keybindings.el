@@ -40,6 +40,10 @@
   "fg" '(consult-ripgrep :wk "ripgrep"))
 
 (mzanic/leader-keys
+  "y" '(:ignore t :wk "yank")
+  "yy" '(yank-from-kill-ring :wk "yank from kill ring"))
+
+(mzanic/leader-keys
   "b" '(:ignore t :wk "buffer")
   "bk" '(kill-this-buffer :wk "kill this buffer"))
 
