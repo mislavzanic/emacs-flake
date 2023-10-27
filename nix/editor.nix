@@ -17,6 +17,8 @@ in {
           use-package
           auto-compile
 
+          ripgrep
+
           vterm
           emacsql-sqlite
           org-roam
@@ -25,6 +27,7 @@ in {
           orderless
           marginalia
           consult
+          consult-projectile
 
           all-the-icons-dired
           dired-open
