@@ -94,6 +94,7 @@ in {
         sqlite
         xdotool
         xorg.xwininfo
+        enchant
       ];
 
       fonts = with pkgs; [
