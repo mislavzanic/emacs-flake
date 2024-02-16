@@ -34,6 +34,12 @@
 
 (global-hl-line-mode)
 
+(use-package jinx
+  :hook (emacs-startup . global-jinx-mode)
+  :bind (("C-c s c" . jinx-correct)
+         ("C-c s l" . jinx-languages)))
+
+
 (use-package xclip
   :demand t
   :config (xclip-mode))

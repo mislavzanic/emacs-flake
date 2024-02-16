@@ -44,6 +44,8 @@ in {
           olivetti
           hide-mode-line
 
+          jinx
+
           which-key
           general
           org
